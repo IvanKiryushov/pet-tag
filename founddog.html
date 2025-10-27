@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Нашёл собаку? / Lost a dog?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: Arial, sans-serif; background: #fafafa; margin:0; padding:20px; }
+      .block { max-width:420px; margin:50px auto; padding:24px; background:#fff; border-radius:10px; box-shadow:0 2px 12px #0002; }
+      h1 { font-size: 1.7em; margin-bottom: 10px; }
+      .btn { display:block; width:100%; margin:12px 0; padding:14px; background:#36bdf7; color:#fff; text-align:center; text-decoration:none; font-weight:bold; font-size:1.2em; border-radius:6px; }
+      .phones { margin:16px 0; }
+      .flag { font-size:1.3em; margin-right:8px; }
+      .lang-switch { margin:20px 0 6px; }
+      .lang-switch button { margin-right:8px; padding:7px 14px; border: none; border-radius: 5px; background: #eee; cursor: pointer; }
+      .info { color: #666; font-size: 1em; margin: 18px 0 0; }
+  </style>
+</head>
+<body>
+<div class="block" id="container">
+
+<!-- Языковой переключатель -->
+<div class="lang-switch">
+  <button onclick="show('ru')">Русский</button>
+  <button onclick="show('en')">English</button>
+</div>
+
+<!-- Русская версия -->
+<div id="ru" style="display:none">
+  <h1>Нашёл собаку?</h1>
+  <a class="btn" href="https://t.me/yourusername" target="_blank">Написать в Telegram</a>
+  <div class="phones">
+    <div><span class="flag">🇷🇺</span><a href="tel:+79219991234">+7 921 999 12 34</a> (Россия)</div>
+    <div><span class="flag">🇪🇸</span><a href="tel:+34600778899">+34 600 778 899</a> (Испания)</div>
+    <div><span class="flag">🇺🇸</span><a href="tel:+12035557890">+1 203 555 7890</a> (США)</div>
+  </div>
+  <a class="btn" href="https://wa.me/79219991234" target="_blank">WhatsApp</a>
+  <a class="btn" href="mailto:dogowner@email.com">E-mail</a>
+  <div class="info">
+    Пожалуйста, позвоните или напишите в <b>Telegram</b>. Если не работает ни один номер — отправьте e-mail.<br>
+    <br>
+    <b>Спасибо за помощь!</b> Здесь указаны контакты владельца для экстренной связи.
+  </div>
+</div>
+
+<!-- English version -->
+<div id="en" style="display:none">
+  <h1>Found a dog?</h1>
+  <a class="btn" href="https://t.me/yourusername" target="_blank">Contact on Telegram</a>
+  <div class="phones">
+    <div><span class="flag">🇷🇺</span><a href="tel:+79219991234">+7 921 999 12 34</a> (Russia)</div>
+    <div><span class="flag">🇪🇸</span><a href="tel:+34600778899">+34 600 778 899</a> (Spain)</div>
+    <div><span class="flag">🇺🇸</span><a href="tel:+12035557890">+1 203 555 7890</a> (USA)</div>
+  </div>
+  <a class="btn" href="https://wa.me/79219991234" target="_blank">WhatsApp</a>
+  <a class="btn" href="mailto:dogowner@email.com">E-mail</a>
+  <div class="info">
+    Please call or message via <b>Telegram</b>. If no numbers work, send an e-mail.<br>
+    <br>
+    <b>Thank you for helping!</b> These are the owner's contacts for urgent cases.
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(lang) {
+    document.getElementById('ru').style.display = (lang==='ru')?'block':'none';
+    document.getElementById('en').style.display = (lang==='en')?'block':'none';
+    localStorage.setItem('lang', lang);
+}
+// Автоопределение языка браузера
+(function(){
+    var userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    let lang = localStorage.getItem('lang') ||
+      (userLang.startsWith('ru') ? 'ru' : 'en');
+    show(lang);
+})();
+</script>
+</body>
+</html>
