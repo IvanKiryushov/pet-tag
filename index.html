@@ -1,80 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Нашёл собаку? / Lost a dog?</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body { font-family: Arial, sans-serif; background: #fafafa; margin:0; padding:20px; }
-      .block { max-width:420px; margin:50px auto; padding:24px; background:#fff; border-radius:10px; box-shadow:0 2px 12px #0002; }
-      h1 { font-size: 1.7em; margin-bottom: 10px; }
-      .btn { display:block; width:100%; margin:12px 0; padding:14px; background:#36bdf7; color:#fff; text-align:center; text-decoration:none; font-weight:bold; font-size:1.2em; border-radius:6px; }
-      .phones { margin:16px 0; }
-      .flag { font-size:1.3em; margin-right:8px; }
-      .lang-switch { margin:20px 0 6px; }
-      .lang-switch button { margin-right:8px; padding:7px 14px; border: none; border-radius: 5px; background: #eee; cursor: pointer; }
-      .info { color: #666; font-size: 1em; margin: 18px 0 0; }
+  <meta charset="UTF-8" />
+  <title>Found Dog / Нашёл собаку?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#f6f7f9; --card:#ffffff; --text:#1f2a37; --muted:#64748b; --brand:#0ea5e9; --ok:#22c55e; --warn:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); background:var(--bg)}
+    .wrap{max-width:880px; margin:0 auto; padding:20px}
+    .card{background:var(--card); border-radius:14px; padding:20px; box-shadow:0 6px 24px rgba(0,0,0,.06); margin:18px 0}
+    .grid{display:grid; grid-template-columns: 1fr; gap:18px}
+    @media (min-width:820px){ .grid{ grid-template-columns: 1.2fr 1fr } }
+    h1{margin:0 0 8px; font-size:1.9rem}
+    h2{margin:0 0 10px; font-size:1.2rem; color:var(--muted)}
+    .photo{width:100%; aspect-ratio: 4/3; background:#e5e7eb; border-radius:12px; overflow:hidden}
+    .photo img{width:100%; height:100%; object-fit:cover}
+    .btn{display:block; width:100%; padding:14px 16px; margin:10px 0; text-align:center; text-decoration:none; color:#fff; background:var(--brand); border-radius:10px; font-weight:700}
+    .btn.ok{ background:var(--ok)}
+    .btn.warn{ background:var(--warn)}
+    .phones div{margin:8px 0}
+    .flag{margin-right:8px}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .tag{background:#eef2ff; color:#3730a3; padding:6px 10px; border-radius:999px; font-size:.9rem}
+    .muted{color:var(--muted)}
+    .lang{display:flex; gap:8px; margin-bottom:10px}
+    .lang button{padding:8px 12px; border:1px solid #e2e8f0; background:#fff; border-radius:8px; cursor:pointer}
+    .alert{background:#fff7ed; color:#9a3412; padding:10px 12px; border-radius:10px; font-size:.95rem}
+    .small{font-size:.9rem}
   </style>
 </head>
 <body>
-<div class="block" id="container">
+<div class="wrap">
 
-<!-- Языковой переключатель -->
-<div class="lang-switch">
-  <button onclick="show('ru')">Русский</button>
-  <button onclick="show('en')">English</button>
-</div>
+  <div class="lang">
+    <button onclick="show('ru')">Русский</button>
+    <button onclick="show('en')">English</button>
+  </div>
 
-<!-- Русская версия -->
-<div id="ru" style="display:none">
-  <h1>Нашёл собаку?</h1>
-  <a class="btn" href="https://t.me/yourusername" target="_blank">Написать в Telegram</a>
-  <div class="phones">
-    <div><span class="flag">🇷🇺</span><a href="tel:+79219991234">+7 921 999 12 34</a> (Россия)</div>
-    <div><span class="flag">🇪🇸</span><a href="tel:+34600778899">+34 600 778 899</a> (Испания)</div>
-    <div><span class="flag">🇺🇸</span><a href="tel:+12035557890">+1 203 555 7890</a> (США)</div>
-  </div>
-  <a class="btn" href="https://wa.me/79219991234" target="_blank">WhatsApp</a>
-  <a class="btn" href="mailto:dogowner@email.com">E-mail</a>
-  <div class="info">
-    Пожалуйста, позвоните или напишите в <b>Telegram</b>. Если не работает ни один номер — отправьте e-mail.<br>
-    <br>
-    <b>Спасибо за помощь!</b> Здесь указаны контакты владельца для экстренной связи.
-  </div>
-</div>
+  <!-- RU -->
+  <section id="ru" class="card" style="display:none">
+    <h1>Нашёл собаку?</h1>
+    <h2>Свяжитесь с владельцем как можно скорее</h2>
 
-<!-- English version -->
-<div id="en" style="display:none">
-  <h1>Found a dog?</h1>
-  <a class="btn" href="https://t.me/yourusername" target="_blank">Contact on Telegram</a>
-  <div class="phones">
-    <div><span class="flag">🇷🇺</span><a href="tel:+79219991234">+7 921 999 12 34</a> (Russia)</div>
-    <div><span class="flag">🇪🇸</span><a href="tel:+34600778899">+34 600 778 899</a> (Spain)</div>
-    <div><span class="flag">🇺🇸</span><a href="tel:+12035557890">+1 203 555 7890</a> (USA)</div>
-  </div>
-  <a class="btn" href="https://wa.me/79219991234" target="_blank">WhatsApp</a>
-  <a class="btn" href="mailto:dogowner@email.com">E-mail</a>
-  <div class="info">
-    Please call or message via <b>Telegram</b>. If no numbers work, send an e-mail.<br>
-    <br>
-    <b>Thank you for helping!</b> These are the owner's contacts for urgent cases.
-  </div>
-</div>
+    <div class="grid">
+      <div>
+        <div class="photo">
+          <!-- Замени src на прямую ссылку фото (например, /img/leya.jpg) -->
+          <img src="leya.jpg" alt="Фото собаки">
+        </div>
 
+        <div class="card" style="margin:18px 0">
+          <h2>О собаке</h2>
+          <div class="row">
+            <span class="tag">Кличка: Боня</span>
+            <span class="tag">Порода: Микс (средняя)</span>
+            <span class="tag">Окрас: рыжий с белым</span>
+            <span class="tag">Пол: сука</span>
+            <span class="tag">Чип: есть</span>
+          </div>
+          <p class="small muted" style="margin-top:10px">
+            Дружелюбная, боится громких звуков. Не давайте шоколад, виноград, кости птицы. Есть аллергия на курицу.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Подсказки</h2>
+          <div class="alert">Если вы не можете дозвониться — напишите в Telegram или WhatsApp. Оставайтесь с собакой в безопасном месте.</div>
+          <p class="small muted">Сообщите текущий адрес или пришлите геопозицию в мессенджере.</p>
+        </div>
+      </div>
+
+      <div>
+        <a class="btn" href="https://t.me/yourusername" target="_blank">Написать в Telegram</a>
+        <a class="btn ok" href="https://wa.me/79219991234" target="_blank">Написать в WhatsApp</a>
+        <a class="btn" href="mailto:dogowner@email.com" target="_blank">Написать e‑mail</a>
+
+        <div class="card">
+          <h2>Телефоны</h2>
+          <div class="phones">
+            <div><span class="flag">🇷🇺</span><a href="tel:+79219991234">+7 921 999 12 34</a> — Россия (МСК)</div>
+            <div><span class="flag">🇪🇸</span><a href="tel:+34600778899">+34 600 778 899</a> — Испания (CET)</div>
+            <div><span class="flag">🇺🇸</span><a href="tel:+12035557890">+1 203 555 7890</a> — США (ET)</div>
+          </div>
+          <p class="small muted">Если кнопки не работают — наберите номер вручную в международном формате.</p>
+        </div>
+
+        <div class="card">
+          <h2>Адрес владельца</h2>
+          <p class="small">Часто в пути; лучше писать в Telegram. При необходимости: [город/район текущего пребывания]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EN -->
+  <section id="en" class="card" style="display:none">
+    <h1>Found a dog?</h1>
+    <h2>Please contact the owner as soon as possible</h2>
+
+    <div class="grid">
+      <div>
+        <div class="photo">
+          <img src="leya.jpg" alt="Dog photo">
+        </div>
+
+        <div class="card" style="margin:18px 0">
+          <h2>About the dog</h2>
+          <div class="row">
+            <span class="tag">Name: Bonya</span>
+            <span class="tag">Breed: Mixed (medium)</span>
+            <span class="tag">Color: tan & white</span>
+            <span class="tag">Sex: female</span>
+            <span class="tag">Microchip: yes</span>
+          </div>
+          <p class="small muted" style="margin-top:10px">
+            Friendly, scared of loud noises. Do not feed chocolate, grapes, or poultry bones. Allergic to chicken.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Tips</h2>
+          <div class="alert">If calls don’t go through, send a Telegram or WhatsApp message. Stay with the dog in a safe place.</div>
+          <p class="small muted">Share your current address or location pin in the messenger.</p>
+        </div>
+      </div>
+
+      <div>
+        <a class="btn" href="https://t.me/yourusername" target="_blank">Message on Telegram</a>
+        <a class="btn ok" href="https://wa.me/79219991234" target="_blank">Message on WhatsApp</a>
+        <a class="btn" href="mailto:dogowner@email.com" target="_blank">Send e‑mail</a>
+
+        <div class="card">
+          <h2>Phone numbers</h2>
+          <div class="phones">
+            <div><span class="flag">🇷🇺</span><a href="tel:+79219991234">+7 921 999 12 34</a> — Russia (MSK)</div>
+            <div><span class="flag">🇪🇸</span><a href="tel:+34600778899">+34 600 778 899</a> — Spain (CET)</div>
+            <div><span class="flag">🇺🇸</span><a href="tel:+12035557890">+1 203 555 7890</a> — USA (ET)</div>
+          </div>
+          <p class="small muted">If buttons fail, dial the number manually in international format.</p>
+        </div>
+
+        <div class="card">
+          <h2>Owner</h2>
+          <p class="small">Often traveling; Telegram works best. If needed: [current city/area]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="muted small">Last updated: <span id="ts"></span></p>
 </div>
 
 <script>
 function show(lang) {
-    document.getElementById('ru').style.display = (lang==='ru')?'block':'none';
-    document.getElementById('en').style.display = (lang==='en')?'block':'none';
-    localStorage.setItem('lang', lang);
+  document.getElementById('ru').style.display = (lang==='ru')?'block':'none';
+  document.getElementById('en').style.display = (lang==='en')?'block':'none';
+  localStorage.setItem('lang', lang);
 }
-// Автоопределение языка браузера
 (function(){
-    var userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-    let lang = localStorage.getItem('lang') ||
-      (userLang.startsWith('ru') ? 'ru' : 'en');
-    show(lang);
+  const userLang = (navigator.language||'').toLowerCase();
+  const saved = localStorage.getItem('lang');
+  const lang = saved || (userLang.startsWith('ru') ? 'ru' : 'en');
+  show(lang);
+  document.getElementById('ts').textContent = new Date().toISOString().slice(0,10);
 })();
 </script>
 </body>
